@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-// var keys = require("./keys.js");
+var keys = require("./keys.js");
 
 // SPOTIFY SECTION
 //  <spotify-this-song> " song name"
