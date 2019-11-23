@@ -1,10 +1,14 @@
 require("dotenv").config();
 
-console.log(process.env.SPOTIFY_ID)
+// var keys = require("./keys.js");
 
-var keys = require("./keys.js");
+// SPOTIFY SECTION
 
-var spotify = new Spotify(keys.spotify);
+//  <spotify-this-song> " song name"
+// Artist(s)
+// The song's name
+// A preview link of the song from Spotify
+// The album that the song is from
 
 var Spotify = require('node-spotify-api');
 
@@ -12,35 +16,73 @@ var spotify = new Spotify({
     id: process.env.SPOTIFY_ID,
     secret: process.env.SPOTIFY_SECRET
 });
+
+var song = process.argv[3]
 spotify
-    .search({ type: 'track', query: 'tupac' })
+    .search({ type: 'track', query: song, limit: 10 })
     .then(function (response) {
-        console.log(response.items);
+        if (process.argv[2] === 'spotify-this-song') {
+            for (var s = 0; s < response.tracks.items.length; s++) {
+                // PULLS ARTIST NAME
+                console.log("Artist: " + response.tracks.items[s].artists[0].name)
+                // PULLS NAME OF THE SONG
+                console.log("Song: " + response.tracks.items[s].name);
+                // PULLS ALBUM NAME
+                console.log("Album: " + response.tracks.items[s].album.name)
+                // PULLS PREVIEW OF THE SONG'S LINK FROM SPOTIFY
+                console.log("Preview Url: " + response.tracks.items[s].external_urls.spotify, "\n")
+            }
+        } else if (process.argv[2] === 'concert-this') {
+            //BANDS IN TOWN
+            var artist = process.argv[3];
+            var axios = require("axios");
+            // BANDS IN TOWN LINK
+            var bandsinTownQueryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"
+
+            axios.get(bandsinTownQueryUrl).then(
+                function (response) {
+                    for (var i = 0; i < response.data.length; i++) {
+                        // artist/band
+                        console.log("Artist: " + process.argv[3])
+                        // name of venue
+                        console.log("Venue: " + response.data[i].venue.name)
+                        // venue location
+                        console.log("Location: " + response.data[i].venue.city)
+                        // date of event
+                        console.log("Time: " + response.data[i].datetime, "\n")
+                    }
+                })
+        } else if (process.argv[2] === "movie-this") {
+            // MOVIE OMDB
+            // movie-this
+            var movieName = process.argv[3];
+
+            var omdbQueryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=119e07e0"
+
+            var axios = require("axios");
+
+            axios.get(omdbQueryUrl).then(
+                function (response) {
+                    // * Title of the movie.
+                    console.log("Movie: " + response.data.Title, "\n")
+                    // * Year the movie came out.
+                    console.log("Year: " + response.data.Year, '\n')
+                    // * IMDB Rating of the movie.
+                    console.log("IMDB Rating: " + response.data.imdbRating, "\n")
+                    // * Rotten Tomatoes Rating of the movie.
+                    console.log("Rotten Tomatoes: " + response.data.Ratings[1].Value, "\n")
+                    // * Country where the movie was produced.
+                    console.log("Country: " + response.data.Country, "\n")
+                    // * Language of the movie.
+                    console.log("Language: " + response.data.Language, "\n")
+                    // * Plot of the movie.
+                    console.log("Plot: " + response.data.Plot, "\n")
+                    // * Actors in the movie.
+                    console.log("Actors: " + response.data.Actors, "\n")
+                }
+            )
+        }
     })
     .catch(function (err) {
         console.log(err);
     });
-
-// var artist = process.argv[2];
-
-// var movieName = process.argv[3];
-
-// var axios = require("axios");
-
-// var bandsinTownQueryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"
-// // name of venue
-// // venue location
-// // date of event
-// var omdbQueryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=119e07e0"
-
-
-// axios.get(bandsinTownQueryUrl).then(
-//     function (response) {
-//         for (var i = 0; i < response.data.length; i++) {
-//             console.log(response.data[i].venue.name)
-//             console.log(response.data[i].venue.city)
-//             console.log(response.data[i].datetime, "\n")
-//         }
-
-
-//     })
