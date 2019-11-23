@@ -3,13 +3,7 @@ require("dotenv").config();
 // var keys = require("./keys.js");
 
 // SPOTIFY SECTION
-
 //  <spotify-this-song> " song name"
-// Artist(s)
-// The song's name
-// A preview link of the song from Spotify
-// The album that the song is from
-
 var Spotify = require('node-spotify-api');
 
 var spotify = new Spotify({
@@ -33,7 +27,7 @@ spotify
                 console.log("Preview Url: " + response.tracks.items[s].external_urls.spotify, "\n")
             }
         } else if (process.argv[2] === 'concert-this') {
-            //BANDS IN TOWN
+            //BANDS IN TOWN <concert-this>
             var artist = process.argv[3];
             var axios = require("axios");
             // BANDS IN TOWN LINK
@@ -81,8 +75,18 @@ spotify
                     console.log("Actors: " + response.data.Actors, "\n")
                 }
             )
+        } else if (process.argv[2] === 'do-what-it-says') {
+            // PULL FROM RANDOM.TXT
+            var fs = require("fs");
+            fs.readFile("./random.txt", "utf8", function (error, data) {
+                if (error) {
+                    return console.log(error);
+                }
+                console.log(data);
+            })
         }
     })
     .catch(function (err) {
         console.log(err);
     });
+
