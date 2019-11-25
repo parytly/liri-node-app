@@ -65,7 +65,7 @@ spotify
             axios.get(omdbQueryUrl).then(
                 function (response) {
                     // * Title of the movie.
-                    console.log("Movie: " + response.data.Title, "\n")
+                    console.log("\nMovie: " + response.data.Title, "\n")
                     // * Year the movie came out.
                     console.log("Year: " + response.data.Year, '\n')
                     // * IMDB Rating of the movie.
@@ -97,39 +97,3 @@ spotify
     .catch(function (err) {
         console.log(err);
     });
-
-
-// var fs = require("fs");
-// fs.readFile("./random.txt", "utf8", function (error, data) {
-//     if (error) {
-//         return console.log(error);
-//     } else if (process.argv[2] === "do-what-it-says") {
-//         console.log(data);
-//     }
-// })
-
-
-// //BANDS IN TOWN <concert-this>
-// var artist = process.argv[2];
-// var axios = require("axios");
-
-// var moment = require('moment');
-// moment().format("MM Do YYYY");
-// // BANDS IN TOWN LINK
-// var bandsinTownQueryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"
-
-
-// axios.get(bandsinTownQueryUrl).then(
-//     function (response) {
-//         for (var i = 0; i < response.data.length; i++) {
-//             // // artist/band
-//             // console.log("Artist: " + process.argv[3])
-//             // // name of venue
-//             // console.log("Venue: " + response.data[i].venue.name)
-//             // // venue location
-//             // console.log("Location: " + response.data[i].venue.city)
-//             // date of event
-//             var time = moment(response.data[i].datetime).format("MM Do YYYY")
-//             console.log("Time: " + time, "\n")
-//         }
-//     })
