@@ -16,6 +16,7 @@
             - Name of the venue
             - Venue location
             - Date of the Event (use moment to format this as "MM/DD/YYYY")
+            ![](images/band-img.png)
 
     - OMDB 
         - Entering in the command line "movie-this" (name of movie), will output:
@@ -27,6 +28,8 @@
             - Language of the movie.
             - Plot of the movie.
             - Actors in the movie.
+            ![](images/omdb-img.png)
     
     - FILE SYSTEM NODE PACKAGE
         - Using fs Node package, entering in the command line "do-what-it-says", will outut the text inside the random.txt file.
+        ![](images/do-what-it-says.png)
