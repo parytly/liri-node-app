@@ -9,7 +9,6 @@
             - The song's name
             - A preview link of the song from Spotify
             - The album that the song is from
-            /Users/paleepary/Desktop/UC Davis Bootcamp/liri-node-app/liri-videos/spotify-example.mov
 
     - BANDS IN TOWN 
         - Entering in the command line "concert-this" (artist/ band name), will output:
