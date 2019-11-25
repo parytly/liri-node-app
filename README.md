@@ -9,7 +9,7 @@
             - The song's name
             - A preview link of the song from Spotify
             - The album that the song is from
-            ![](liri-videos/spotify-example.mov)
+            ![](images/spotify-img.png)
 
     - BANDS IN TOWN 
         - Entering in the command line "concert-this" (artist/ band name), will output:
